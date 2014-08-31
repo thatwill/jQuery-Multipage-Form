@@ -35,7 +35,7 @@
 
 		
 		jQuery.fn.gotopage = function(page) {
-			$(id + '_nav .multipage_next').html('Next');				
+			$(id + '_nav .multipage_next').html(settings.nextLabel);
 			
 			if (isNaN(page)) { 
 				q = page;
@@ -76,9 +76,9 @@
 				$(id + '_nav .multipage_back').hide();
 				$(id + '_nav .multipage_next').show();
 				if (settings.pages[page].title) {
-					$(id + '_nav .multipage_next').html('Next: ' + settings.pages[page].title);
+					$(id + '_nav .multipage_next').html(settings.nextLabel + ': ' + settings.pages[page].title);
 				} else {
-					$(id + '_nav .multipage_next').html('Next');
+					$(id + '_nav .multipage_next').html(settings.nextLabel);
 				}
 
 			} else if (page==settings.pages.length) { 
@@ -87,9 +87,9 @@
 				$(id + '_nav .multipage_next').show();
 
 				if (settings.pages[page-2].title) { 
-					$(id + '_nav .multipage_back').html('Back: ' + settings.pages[page-2].title);
+					$(id + '_nav .multipage_back').html(settings.backLabel + ': ' + settings.pages[page-2].title);
 				} else {
-					$(id + '_nav .multipage_back').html('Back');				
+					$(id + '_nav .multipage_back').html(settings.backLabel);
 				}
 
 				$(id + '_nav .multipage_next').addClass('submit');				
@@ -97,14 +97,14 @@
 				
 			} else {
 				if (settings.pages[page-2].title) { 
-					$(id + '_nav .multipage_back').html('Back: ' + settings.pages[page-2].title);
+					$(id + '_nav .multipage_back').html(settings.backLabel + ': ' + settings.pages[page-2].title);
 				} else {
-					$(id + '_nav .multipage_back').html('Back');				
+					$(id + '_nav .multipage_back').html(settings.backLabel);
 				}
 				if (settings.pages[page].title) {
-					$(id + '_nav .multipage_next').html('Next: ' + settings.pages[page].title);
+					$(id + '_nav .multipage_next').html(settings.nextLabel + ': ' + settings.pages[page].title);
 				} else {
-					$(id + '_nav .multipage_next').html('Next');
+					$(id + '_nav .multipage_next').html(settings.nextLabel);
 				}
 
 				$(id + '_nav .multipage_back').show();
@@ -180,8 +180,7 @@
 	
 	
 	jQuery.fn.multipage = function(options) { 
-		
-		settings = jQuery.extend({stayLinkable:false,submitLabel:'Submit',hideLegend:false,hideSubmit:true,generateNavigation:true,activeDot:'&nbsp;&#x25CF;',inactiveDot:'&nbsp;&middot;'},options);
+		settings = jQuery.extend({stayLinkable:false,submitLabel:'Submit',nextLabel:'Next',backLabel:'Back',hideLegend:false,hideSubmit:true,generateNavigation:true,activeDot:'&nbsp;&#x25CF;',inactiveDot:'&nbsp;&middot;'},options);
 		id = '#' + $(this).attr('id');
 		var form = $(this);			
 		

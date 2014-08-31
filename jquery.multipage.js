@@ -195,11 +195,11 @@
 		// hide all the pages 
 		$(id +' fieldset').hide();
 			if (settings.hideSubmit) { 
-				$(id+' input[type="submit"]').hide();
+				$(id+' *[type="submit"]').hide();
 			}		
 			
-			if ($(id+' input[type="submit"]').val()!='') { 
-				settings.submitLabel = $(id+' input[type="submit"]').val();
+			if ($(id+' *[type="submit"]').val()!='') {
+				settings.submitLabel = $(id+' *[type="submit"]').val();
 			}
 			
 			settings.pages = new Array();

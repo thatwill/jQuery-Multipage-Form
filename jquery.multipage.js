@@ -118,9 +118,13 @@
 			
 		}
 		
-	jQuery.fn.validatePage = function(page) { 
-			return true;
-		}
+	jQuery.fn.validatePage = function(page) {
+            if (settings.validatePageFunction) {
+                return settings.validatePageFunction(page);
+            } else {
+                return true;
+            }
+        }
 
 		
 	jQuery.fn.validateAll = function() { 

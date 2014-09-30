@@ -61,6 +61,7 @@ The full set of options is as follows:
 		'navigationFunction': function(pages){},		// a function that generates the nav, receives array of pages
 		'stateFunction': function(page){},		// a function that shows what page the user is viewing, receives current page #
 		'transitionFunction': function(from,to){} // a function that transitions from one page $(from) to another $(to)
+		'validatePageFunction': function(page){} // a function that can prevent transition by returning false
 	});
 
 

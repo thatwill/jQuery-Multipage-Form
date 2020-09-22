@@ -16,7 +16,7 @@
 			}
 			$(id + ' fieldset').removeClass('active');
 			$(to).addClass('active');		
-		}
+		};
 		
 		jQuery.fn.showState = function(page) { 
 			
@@ -32,7 +32,7 @@
 				}
 			}
 			$(id+"_nav .multipage_state").html(state);	
-		}
+		};
 
 		
 		jQuery.fn.gotopage = function(page) {
@@ -117,7 +117,7 @@
 			curpage=page;
 			return false;
 			
-		}
+		};
 		
 	jQuery.fn.validatePage = function(page) {
             if (settings.validatePageFunction) {
@@ -125,7 +125,7 @@
             } else {
                 return true;
             }
-        }
+        };
 
 		
 	jQuery.fn.validateAll = function() { 
@@ -136,19 +136,20 @@
 			}
 		}
 		return true;
-	}	
+	};
 
 		
 	jQuery.fn.gotofirst = function() {
 		curpage = 1;
 		$(this).gotopage(curpage);
 		return false;
-	}
+	};
+
 	jQuery.fn.gotolast = function() {
 		curpage = settings.pages.length;
 		$(this).gotopage(curpage);
 		return false;
-	}
+	};
 
 	jQuery.fn.nextpage = function() {
 			// validate the current page
@@ -165,7 +166,7 @@
 			}
 			return false;
 		
-	}
+	};
 
 	jQuery.fn.disablePage = function(page) {
 		page=page-1;
@@ -173,7 +174,7 @@
 			settings.pages.splice(page,1); //remove page
 			$(this).generateNavigationSection(true);
 		}
-	}
+	};
 
 	jQuery.fn.enablePage = function(page) {
 		page=page-1;
@@ -182,11 +183,11 @@
 			$(this).generateNavigationSection(true);
 		}
 		
-	}
+	};
 	
 	jQuery.fn.getPages = function() {
 		return settings.pages;
-	}
+	};
 		
 	jQuery.fn.prevpage = function() {
 
@@ -198,7 +199,7 @@
 		$(this).gotopage(curpage);
 		return false;
 		
-	}
+	};
 	
 	jQuery.fn.generateNavigationSection = function(regen) {
 		if (settings.generateNavigation) { 
@@ -218,7 +219,7 @@
 	        	}
 			}
 		}
-	}
+	};
 	
 	jQuery.fn.multipage = function(options) { 
 		settings = jQuery.extend({
@@ -241,8 +242,8 @@
 		
 		form.submit(function(e) {
 			if (!$(this).validateAll()) {
-				e.preventDefault()
-			};
+				e.preventDefault();
+			}
 		});
 		
 		// hide all the pages 
@@ -264,7 +265,7 @@
 				settings.pages[index] = objPage;
 				pageStore[index] = objPage;
 			});
-			
+
 			
 			if (settings.hideLegend) { 
 				// hide legend tags
@@ -285,7 +286,7 @@
 			}	
 			return false;
 		
-		}
+		};
 		
 
 })(jQuery);

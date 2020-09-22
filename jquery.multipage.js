@@ -249,10 +249,11 @@
 		$(id +' fieldset').hide();
 			if (settings.hideSubmit) { 
 				$(id+' *[type="submit"]').hide();
-			}		
-			
-			if ($(id+' *[type="submit"]').val()!='') {
-				settings.submitLabel = $(id+' *[type="submit"]').val();
+			}
+
+			submitVal = $(id+' *[type="submit"]').val();
+			if (submitVal && submitVal!='') {
+				settings.submitLabel = submitVal;
 			}
 			
 			settings.pages = new Array();

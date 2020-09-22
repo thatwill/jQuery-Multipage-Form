@@ -3,13 +3,7 @@
 Sometimes, you have a lot of form fields, and you need
 to break them up into multiple pages.  This plugin does that!
 
-[Get it from Github](https://github.com/xoxco/jQuery-multipage-form)
-
-[View Demo](http://xoxco.com/projects/code/multipage/)
-
-[Test it yourself using this jsFiddle Demo](http://jsfiddle.net/eJKQn/)
-
-Created by [XOXCO](http://xoxco.com)
+Originally created by [XOXCO](http://xoxco.com)
 
 
 By default, it will take all of the `<fieldset>` tags in your form,
@@ -56,6 +50,7 @@ The full set of options is as follows:
 		'hideLegend': false, 		// should the plugin hide the <legend> tags?  useful in concert with externally generated nav
 		'hideSubmit': true, 		// should the plugin hide the submit button?
 		'generateNavigation': true,	// should the plugin generate its own navigation buttons?
+		'navButtonClasses': ''		// add additional CSS classes to the navigation buttons.
 		'activeDot': '&nbsp;&#x25CF;',			// the dot used to represent an active page in the nav
 		'inactiveDot': '&nbsp;&middot;',		// the dot used to represent an inactive page in the nav
 		'navigationFunction': function(pages){},		// a function that generates the nav, receives array of pages
@@ -88,6 +83,12 @@ access the pages via the following functions:
 
 	// get an array of pages
 	var pages = $('#myform').getPages();
+	
+	// Disable and hide page by number
+	$('#myform').disablePage(3);
+	
+	// Reenable previously hidden page
+	$('#myform').enablePage(3);
 
 
 ## Feature Roadmap

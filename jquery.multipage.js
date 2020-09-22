@@ -4,7 +4,8 @@
 		var curpage = 1;
 		var id = null;
 		var settings = null;
-		
+		var pageStore =  new Array();
+
 		jQuery.fn.transitionPage = function(from,to) {
 		
 			if (settings.transitionFunction) {
@@ -165,6 +166,23 @@
 			return false;
 		
 	}
+
+	jQuery.fn.disablePage = function(page) {
+		page=page-1;
+		if (settings.pages[page] !== undefined) {
+			settings.pages.splice(page,1); //remove page
+			$(this).generateNavigationSection(true);
+		}
+	}
+
+	jQuery.fn.enablePage = function(page) {
+		page=page-1;
+		if (settings.pages[page] === undefined) {
+			settings.pages.splice(page,0,pageStore[page]); // re-add the page from the pageStore
+			$(this).generateNavigationSection(true);
+		}
+		
+	}
 	
 	jQuery.fn.getPages = function() {
 		return settings.pages;
@@ -182,9 +200,40 @@
 		
 	}
 	
+	jQuery.fn.generateNavigationSection = function(regen) {
+		if (settings.generateNavigation) { 
+			if (settings.navigationFunction) { 
+				settings.navigationFunction($(this).getPages());
+			} else {
+				
+	            var id_name = $(this).attr('id');
+	            if (regen) {
+	            	$('#'+id_name+'_nav').remove(); //remove existing nav
+	            }
+	            // insert navigation
+	            $('<div class="multipage_nav" id="'+id_name+'_nav"><a href="#" class="multipage_back '+settings.navButtonClasses+'" onclick="return  $(\''+id+'\').prevpage();">Back</a><a href="#"  class="multipage_next '+settings.navButtonClasses+'" onclick="return $(\''+id+'\').nextpage();">Next</a><span class="multipage_state"></span><div class="clearer"></div></div>').insertAfter(this);
+
+	            if (regen) {
+	            	$(this).gotopage(curpage); //reinit page state
+	        	}
+			}
+		}
+	}
 	
 	jQuery.fn.multipage = function(options) { 
-		settings = jQuery.extend({stayLinkable:false,submitLabel:'Submit',nextLabel:'Next',backLabel:'Back',hideLegend:false,hideSubmit:true,generateNavigation:true,activeDot:'&nbsp;&#x25CF;',inactiveDot:'&nbsp;&middot;'},options);
+		settings = jQuery.extend({
+				stayLinkable:false,
+				submitLabel:'Submit',
+				nextLabel:'Next',
+				backLabel:'Back',
+				hideLegend:false,
+				hideSubmit:true,
+				generateNavigation:true,
+				navButtonClasses:'',
+				activeDot:'&nbsp;&#x25CF;',
+				inactiveDot:'&nbsp;&middot;'
+			},options);
+
 		id = '#' + $(this).attr('id');
 		var form = $(this);			
 		
@@ -210,7 +259,9 @@
 			
 			$(this).children('fieldset').each(function(index) { 
 				label = $(this).children('legend').html();
-				settings.pages[index] = {number:index+1,title:label,id:$(this).attr('id')};
+				objPage = {number:index+1,title:label,id:$(this).attr('id')};
+				settings.pages[index] = objPage;
+				pageStore[index] = objPage;
 			});
 			
 			
@@ -224,16 +275,8 @@
 
 			$(id+' fieldset:first').show();
 									
-			if (settings.generateNavigation) { 
-				if (settings.navigationFunction) { 
-					settings.navigationFunction($(this).getPages());
-				} else {
-					// insert navigation
-                                        var id_name = $(this).attr('id');
-                                        $('<div class="multipage_nav" id="'+id_name+'_nav"><a href="#" class="multipage_back" onclick="return  $(\''+id+'\').prevpage();">Back</a><a href="#"  class="multipage_next" onclick="return $(\''+id+'\').nextpage();">Next</a><span class="multipage_state"></span><div class="clearer"></div></div>').insertAfter(this);
-				}
-			}				
-			
+			$(this).generateNavigationSection();
+						
 			if (document.location.hash) { 
 				$(this).gotopage('#'+document.location.hash.substring(1,document.location.hash.length));
 			} else {
